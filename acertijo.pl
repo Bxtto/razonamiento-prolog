@@ -85,3 +85,19 @@ despues(E1, E2, Estudiantes) :-
    write('Solución encontrada:'), nl,
    member(estudiante(_, _, _, _, _), Estudiantes),
    write(Estudiantes), nl.
+
+% Predicado para mostrar la solución de forma legible
+mostrar_solucion :-
+    solucion(Estudiantes),
+    write('=== Solución del Acertijo ==='), nl,
+    write('Pos | Nombre     | Color    | Género          | Páginas'), nl,
+    write('----+-----------+----------+----------------+---------'), nl,
+    member(estudiante(Pos, Nombre, Color, Genero, Paginas), Estudiantes),
+    format('~d   | ~w | ~w | ~w | ~w~n', [Pos, Nombre, Color, Genero, Paginas]),
+    fail.
+mostrar_solucion.
+
+% Consultas de ejemplo:
+% ?- mostrar_solucion.                    % Muestra toda la solución
+% ?- solucion(X), member(estudiante(1,Nombre,Color,Genero,Paginas), X).  % Muestra quién está en la posición 1
+% ?- solucion(X), member(estudiante(_,karina,Color,Genero,Paginas), X).  % Muestra los datos de Karina
